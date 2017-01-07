@@ -1,0 +1,33 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace LogicalSeries
+{
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            Console.WriteLine("MetaSerie::");
+
+            MetaSerie meta = new MetaSerie();
+
+            int index = 0;
+
+            while (Console.ReadKey(true).Key != ConsoleKey.Escape)
+            {
+                string item = meta.GenerateNext();
+                var stat = MetaSerieStat.GetItemStat(item);
+                //Console.WriteLine("Item #{0}: {1}", index, item);
+                Console.WriteLine("Stat #{0}: (count::{1}, 1::{2}%, 2::{3}%, 3::{4}%)",
+                    index, stat.Count, stat.Pct1, stat.Pct2, stat.Pct3);
+                index++;
+            }
+
+            Console.WriteLine("Done.");
+            Console.ReadKey(true);
+        }
+    }
+}
